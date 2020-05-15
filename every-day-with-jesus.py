@@ -27,22 +27,40 @@ try:
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-    content = soup.find_all(
-        'div', class_="articleContentBody devotionalContentBody col-xs-12 col-sm-12 col-md-12")
+    content = soup.find('div', id='content')
 
-    for tag in content:
+    content1 = content.find('div', class_="articleContentBody")
+
+    divs = content1.find_all('div')
+    strongs = content1.find_all('strong')
+    ass = content1.find_all('a')
+
+    print(strongs[0].text)
+    print(strongs[1].text)
+    print(ass[0].text)
+    print(divs[0].text.lstrip())
+    print("")
+    print(ass[1].text)
+
+    """ for tag in content:
         div_tag = tag.find_all('div')
+
+        print(div_tag)
 
         reading = div_tag[0]
 
         p_tags = tag.find_all('p')
         main_p_tag = p_tags[1].find_all()
 
+        print(p_tags)
+        print(reading)
+
         title = main_p_tag[4]
         date = main_p_tag[1]
         meditation = main_p_tag[7]
 
-        todaysReading = (date.text, title.text, meditation.text, reading.text.lstrip(), datetime.datetime.now())
+        todaysReading = (date.text, title.text, meditation.text,
+                         reading.text.lstrip(), datetime.datetime.now())
 
         # adding data into the db
         add_sql = '''
@@ -53,7 +71,7 @@ try:
         cursor.execute(add_sql, todaysReading)
         conn.commit()
 
-        cursor.close()
+        cursor.close() """
 
 
 except sqlite3.Error as error:
