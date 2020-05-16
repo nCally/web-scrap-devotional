@@ -28,19 +28,28 @@ try:
 
     soup = BeautifulSoup(page.content, 'html.parser')
     content = soup.find('div', id='content')
-
     content1 = content.find('div', class_="articleContentBody")
 
     divs = content1.find_all('div')
     strongs = content1.find_all('strong')
-    ass = content1.find_all('a')
 
-    print(strongs[0].text)
-    print(strongs[1].text)
-    print(ass[0].text)
-    print(divs[0].text.lstrip())
-    print("")
-    print(ass[1].text)
+    reading_and_meditation = content1.find('font', class_="headSub")
+    related = reading_and_meditation.find_next_siblings()
+
+    main_scripture = related[0].text
+    verse = related[2].text
+
+    day = strongs[0].text
+    title = strongs[1].text
+    reading = divs[0].text.lstrip()
+    prayer = divs[3].text.lstrip()
+
+    print("References:")
+
+    for tags in divs[0].find_next_siblings():
+        ass = tags.find_all('a')
+        for yas in ass:
+            print(yas.get_text())
 
     """ for tag in content:
         div_tag = tag.find_all('div')
