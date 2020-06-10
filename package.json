@@ -1,0 +1,15 @@
+{
+  "name": "pedwj",
+  "version": "1.0.0",
+  "description": "devotional scrapping",
+  "main": "index.js",
+  "repository": "https://github.com/nCally/web-scrap-devotional.git",
+  "author": "nCally <cartrf@live.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sequelize": "^5.21.12",
+    "sqlite3": "^4.2.0"
+  }
+}
