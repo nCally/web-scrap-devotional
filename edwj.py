@@ -43,10 +43,11 @@ try:
         'prayer': prayer
     }
 
-    postURI = 'http://localhost:3003/api/add-today'
+    postURI = 'http://localhost:3030/add-today'
     response = requests.post(postURI, json=todays_reading)
 
     r = response.json()
+    console.log(r)
 
 
 except:

@@ -10,10 +10,23 @@ module.exports = {
       limit: 1,
       order: [['createdAt', 'DESC']]
     })
-    latest = latest.get({ plain: true });
-    res.status(200).json({
-      data: latest
-    })
+
+    if (latest) {
+      latest = latest.get({ plain: true });
+
+      console.log(latest, ' second latest')
+      res.status(200).json({
+        data: latest,
+        message: 'todays devotional'
+      })
+    } else {
+      res.status(200).json({
+        data: {},
+        message: 'no devotional data'
+      })
+    }
+
+
   },
 
   // Controller to save what is gotten from the web scrap
@@ -21,7 +34,7 @@ module.exports = {
     //
     let saved = await devotional.create(req.body);
     if (saved) {
-      res.sendStatus(200)
+      res.sendStatus(200);
     } else {
       res.sendStatus(200);
     }

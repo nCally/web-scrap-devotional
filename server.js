@@ -14,7 +14,7 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 
 
-server.get("/edwj-today");
+server.get("/edwj-today", controller.get_today);
 
 server.post("/add-today", controller.add_today);
 
