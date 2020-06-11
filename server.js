@@ -1,17 +1,22 @@
 
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./db");
+const controller = require("./controllers");
 
 const server = express();
 
 const origin = { origin: '*', }
 server.use(cors(origin));
 
-
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
 
 
 server.get("/edwj-today");
+
+server.post("/add-today", controller.add_today);
 
 
 
