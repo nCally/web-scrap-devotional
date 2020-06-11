@@ -6,7 +6,14 @@ module.exports = {
   // Controller to return todays every day with Jesus
   async get_today(req, res) {
     //
-    res.status(200).json()
+    let latest = await devotional.findOne({
+      limit: 1,
+      order: [['createdAt', 'DESC']]
+    })
+    latest = latest.get({ plain: true });
+    res.status(200).json({
+      data: latest
+    })
   },
 
   // Controller to save what is gotten from the web scrap

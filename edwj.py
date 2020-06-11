@@ -28,14 +28,25 @@ try:
     prayer = divs[3].text.lstrip()
 
     other_references = ""
-
     for tags in divs[0].find_next_siblings():
         ass = tags.find_all('a')
         for yas in ass:
             other_references = other_references + yas.get_text() + ". "
 
-    todays_reading = (day, main_scripture, verse, title,
-                      other_references, reading, prayer, datetime.datetime.now())
+    todays_reading = {
+        'day': day,
+        'main': main_scripture,
+        'focus': verse,
+        'topic': title,
+        'reference': other_references,
+        'reading': reading,
+        'prayer': prayer
+    }
+
+    postURI = 'http://localhost:3003/api/add-today'
+    response = requests.post(postURI, json=todays_reading)
+
+    r = response.json()
 
 
 except:
